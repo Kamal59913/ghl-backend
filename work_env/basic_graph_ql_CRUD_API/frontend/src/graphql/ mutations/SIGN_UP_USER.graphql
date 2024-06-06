@@ -1,0 +1,8 @@
+mutation AddUser($input: AddUsersTypeInput) {
+  addUser(input: $input) {
+    errors {
+      message
+      code
+    }
+  }
+}
