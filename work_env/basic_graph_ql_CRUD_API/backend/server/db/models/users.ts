@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose';
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 export type user = {
@@ -33,10 +32,6 @@ const userSchema = new Schema<user>({
   this.password = await bcrypt.hash(this.password, 10)
   next()
 })
-
-userSchema.methods.isPassWordCorrect = async function(password) {
-  return await bcrypt.compare(password,this.password)
-}
 
 const userModel = model('User', userSchema);
 

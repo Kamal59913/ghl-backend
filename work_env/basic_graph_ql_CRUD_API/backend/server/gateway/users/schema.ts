@@ -8,6 +8,9 @@ import updateUserResolver from "./resolver/toUpdate/updateUserResolver"
 import getUsersResolver from "./resolver/toGet/userListResolver"
 import { AddUsersTypeInput } from "./types/AddUsersTypeInput"
 import { UpdateUserTypeInput } from "./types/UpdateUserTypeInput"
+import AuthPayload from "./types/AuthPayLoad/AuthPayload"
+import { LoginUserType } from "./types/LoginUserType"
+import loginResolver from "./resolver/toLogin/loginResolver"
 
 export const userQuery = {
     getusersList: {
@@ -34,6 +37,15 @@ export const usersMutation = {
             }
         },
         resolve: updateUserResolver
+    },
+    login: {
+        type: AuthPayload,
+        args: {
+            input: {
+                type: LoginUserType
+            }
+        },
+        resolve: loginResolver
     }
 }
     
