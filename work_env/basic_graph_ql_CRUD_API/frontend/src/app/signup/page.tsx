@@ -9,9 +9,11 @@ import SIGN_UP from '../../graphql/ mutations/SIGN_UP_USER.graphql'
 import { schema } from "./SchemaValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormValues } from "./types";
-
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
+
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -51,14 +53,9 @@ export default function Signup() {
             } 
           });
 
-        if(loading) {
-          console.log("loading", loading)
-        } 
-        if(error) {
-          console.log("error", error)
-        }
-        if(data) {
-          console.log("data", data)
+        if(signupresponse.data.addUser.success == true) {
+            console.log("User have Signed Up Successfully")
+            router.push('/login')
         }
       } catch (e) {
         console.error(e);

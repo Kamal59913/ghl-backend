@@ -1,13 +1,13 @@
 "use client"
-
-import Image from "next/image";
 import Link from "next/link";
-// import { useRouter } from "next/router";
-import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { getCookie, setCookie } from "cookies-next";
 import { schema } from "./SchemaValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormValues } from "./types";
+import { useMutation } from "@apollo/client";
+import LOG_IN from '../../graphql/ mutations/LOG_IN.graphql'
+
 export default function LogIn() {
   
   const {
@@ -16,7 +16,7 @@ export default function LogIn() {
     register,
     formState: { errors },
   } = useForm({
-    defaultValues: {
+      defaultValues: {
       email: "",
       password: ""
     },
@@ -25,10 +25,22 @@ export default function LogIn() {
     resolver: yupResolver(schema)
   })
 
+  const [loginUser, { data, loading, error }] = useMutation(LOG_IN);
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
     try {
-          console.log("loggedIn")
-      
+      const loginresponse = await loginUser({
+        variables: {
+          input: 
+            {
+              email: values.email,
+              password: values.password
+            }
+        }
+      });
+
+      if(loginresponse.data.login.token) {
+          setCookie('AccessToken', loginresponse.data.login.token, { httpOnly: true, secure: true, sameSite: false})
+      }
     } catch (e) {
       console.log(e);
     }

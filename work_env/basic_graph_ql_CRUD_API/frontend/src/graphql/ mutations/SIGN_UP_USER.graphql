@@ -1,5 +1,11 @@
 mutation AddUser($input: AddUsersTypeInput) {
   addUser(input: $input) {
+    success
+    user {
+      username
+      email
+      password
+    }
     errors {
       message
       code

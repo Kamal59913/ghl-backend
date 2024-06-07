@@ -15,6 +15,7 @@
     "@million/lint": "^1.0.0-rc.26",
     "axios": "^1.7.2",
     "check-password-strength": "^2.0.10",
+    "cookies-next": "^4.2.1",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.23.0",
     "graphql-tag": "^2.12.6",
