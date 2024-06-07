@@ -26,7 +26,9 @@ const loginResolver = async (parent, args, context) => {
     
     const jwtAccessToken = await generateToken(user) 
 
-    
+    console.log("JWT access token is here", jwtAccessToken)
+    console.log("Password is", ispasspordcorrect)
+
     const loggedInUser = await userModel.findOne({email}).select("-password -refreshToken")
 
     const errors = [];

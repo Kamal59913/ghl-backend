@@ -11,6 +11,7 @@ import { UpdateUserTypeInput } from "./types/UpdateUserTypeInput"
 import AuthPayload from "./types/AuthPayLoad/AuthPayload"
 import { LoginUserType } from "./types/LoginUserType"
 import loginResolver from "./resolver/toLogin/loginResolver"
+import UsersList from "./types/UsersList"
 
 export const userQuery = {
     getusersList: {
@@ -46,6 +47,6 @@ export const usersMutation = {
             }
         },
         resolve: loginResolver
-    }
+    },
 }
     

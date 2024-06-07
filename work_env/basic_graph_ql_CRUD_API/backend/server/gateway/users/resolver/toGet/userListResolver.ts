@@ -1,33 +1,23 @@
-import mongoose from 'mongoose';
-import userModel from '../../../../db/models/users';
+import userModel from "../../../../db/models/users";
+import { validateEmail, validatePassword, validateUsername } from "../../validation/validation";
 
-const getUsersResolver = async (): Promise<any> => {
+const getUserResolver = async (parent, args, context) => {
   try {
+      const users = await userModel.find()
+      console.log(users)
 
-    const bookList: any[] = await userModel.find()
+   return {
+    success: true,
+    message: "User Added Successfully",
+    user: users
+   }
 
-    console.log("Hello world")
-    
-    if (!bookList) {
-      return {
-        errors: [
-          {
-            message: 'Employee not found',
-            code: 'BAD_Users_INPUT',
-          },
-        ],
-      };
-    }
-    return {
-        bookList,
-      errors: null,
-    };
   } catch (e) {
     console.log(e);
     return {
       errors: [
         {
-          message: 'Something went wrong',
+          message: 'Something went wrongf',
           code: 'SERVER_ERROR',
         },
       ],
@@ -35,4 +25,4 @@ const getUsersResolver = async (): Promise<any> => {
   }
 };
 
-export default getUsersResolver;
+export default getUserResolver;
