@@ -577,8 +577,20 @@ video {
   white-space: nowrap;
   border-width: 0;
 }
+.absolute {
+  position: absolute;
+}
 .relative {
   position: relative;
+}
+.bottom-4 {
+  bottom: 1rem;
+}
+.left-4 {
+  left: 1rem;
+}
+.z-0 {
+  z-index: 0;
 }
 .-mx-1 {
   margin-left: -0.25rem;
@@ -603,6 +615,10 @@ video {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .ml-2 {
   margin-left: 0.5rem;
@@ -652,6 +668,9 @@ video {
 .h-8 {
   height: 2rem;
 }
+.h-\[342px\] {
+  height: 342px;
+}
 .h-full {
   height: 100%;
 }
@@ -673,6 +692,9 @@ video {
 .w-full {
   width: 100%;
 }
+.max-w-7xl {
+  max-width: 80rem;
+}
 .max-w-xs {
   max-width: 20rem;
 }
@@ -688,11 +710,17 @@ video {
 .items-center {
   align-items: center;
 }
+.justify-end {
+  justify-content: flex-end;
+}
 .justify-center {
   justify-content: center;
 }
 .justify-between {
   justify-content: space-between;
+}
+.gap-\[30px\] {
+  gap: 30px;
 }
 .space-y-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -703,6 +731,9 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
+.rounded-\[10px\] {
+  border-radius: 10px;
 }
 .rounded-lg {
   border-radius: 0.5rem;
@@ -729,6 +760,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(255 237 213 / var(--tw-bg-opacity));
 }
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
 .bg-transparent {
   background-color: transparent;
 }
@@ -744,6 +779,10 @@ video {
 }
 .p-1\.5 {
   padding: 0.375rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .px-3 {
   padding-left: 0.75rem;
@@ -772,6 +811,9 @@ video {
 .pt-2 {
   padding-top: 0.5rem;
 }
+.text-start {
+  text-align: start;
+}
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -783,6 +825,10 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 .text-xs {
   font-size: 0.75rem;
@@ -993,6 +1039,19 @@ video {
   .sm\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+}
+
+
+@media (min-width: 768px) {
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
 

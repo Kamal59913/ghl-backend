@@ -1,15 +1,18 @@
 "use client"
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { getCookie, setCookie } from "cookies-next";
+import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import { schema } from "./SchemaValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormValues } from "./types";
 import { useMutation } from "@apollo/client";
 import LOG_IN from '../../graphql/ mutations/LOG_IN.graphql'
+import { useRouter } from "next/navigation";
+
 
 export default function LogIn() {
-  
+  const router = useRouter();
+
   const {
     handleSubmit,
     reset,
@@ -39,8 +42,16 @@ export default function LogIn() {
       });
 
       if(loginresponse.data.login.token) {
-          setCookie('AccessToken', loginresponse.data.login.token, { httpOnly: true, secure: true, sameSite: false})
-      }
+        router.push('/profile-page')
+
+        const token = loginresponse.data.login.token
+        console.log(loginresponse.data.login.token)
+        console.log("success")
+        deleteCookie("AccessToken", { httpOnly: true, secure: true, sameSite: 'none'});
+        setCookie('AccessToken', loginresponse.data.login.token, { httpOnly: false, secure: true, sameSite: 'none'})
+        localStorage.setItem('AccessToken', token)
+
+      } 
     } catch (e) {
       console.log(e);
     }

@@ -53,7 +53,9 @@ export default function Signup() {
             } 
           });
 
-        if(signupresponse.data.addUser.success == true) {
+          console.log("hi hi hi")
+        if(signupresponse.data.addUser.success == true){
+            console.log(signupresponse)
             console.log("User have Signed Up Successfully")
             router.push('/login')
         }
