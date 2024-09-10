@@ -1,9 +1,9 @@
 import express from "express";
-import { editSaveSearch } from "../controller/saveSearch.controller";
+import { createSaveSearch, editSaveSearch } from "../controller/saveSearch.controller";
 
 const router = express.Router();
 
-// router.post("/savealert", createSaveSearch);
+router.post("/savealert", createSaveSearch);
 router.post("/editalert", editSaveSearch);
 
 export default router;

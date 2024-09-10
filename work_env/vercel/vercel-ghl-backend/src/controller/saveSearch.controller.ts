@@ -4,89 +4,89 @@ import { saveSearchModel } from "../model/saveSearch.model";
 import PropertyFormModel from "../model/property.model";
 import sendSaveSearchEmail from "../utils/saveSearchMail";
 
-// const createSaveSearch = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const { userId, priceRange, sqftRange, beds, baths, yearAge, locations } = req.body;
+const createSaveSearch = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { userId, priceRange, sqftRange, beds, baths, yearAge, locations } = req.body;
 
-//     // Validate if locations is an array
-//     if (!Array.isArray(locations)) {
-//       res.status(400).json({ error: "Locations should be an array" });
-//       return;
-//     }
+    // Validate if locations is an array
+    if (!Array.isArray(locations)) {
+      res.status(400).json({ error: "Locations should be an array" });
+      return;
+    }
 
-//     // Process and geocode each location
-//     const processedLocations = await Promise.all(
-//       locations.map(async (location: [any, any, any]) => {
-//         const [state, city, zip] = location;
+    // Process and geocode each location
+    const processedLocations = await Promise.all(
+      locations.map(async (location: [any, any, any]) => {
+        const [state, city, zip] = location;
 
-//         try {
-//           // Geocode the location to get coordinates
+        try {
+          // Geocode the location to get coordinates
 
-//           const location = await geocodeAddress(state, city, zip);
+          const location = await geocodeAddress(state, city, zip);
 
-//           if (!location) {
-//             return res.status(400).json({
-//               success: false,
-//               message: "Geocoding failed. Could not determine the property's location.",
-//             });
-//           }
+          if (!location) {
+            return res.status(400).json({
+              success: false,
+              message: "Geocoding failed. Could not determine the property's location.",
+            });
+          }
 
-//           const { lat, lng } = location;
+          const { lat, lng } = location;
 
-//           // Ensure lat and lng are defined, else use default values
-//           return {
-//             city,
-//             state,
-//             zip,
-//             coordinates: {
-//               latitude: lat !== undefined ? lat : null,
-//               longitude: lng !== undefined ? lng : null,
-//             },
-//             range: 50, // Default range value
-//           };
-//         } catch (error) {
-//           // Handle geocoding errors and use default values
-//           return {
-//             city,
-//             state,
-//             zip,
-//             coordinates: {
-//               latitude: null,
-//               longitude: null,
-//             },
-//             range: 50, // Default range value
-//           };
-//         }
-//       })
-//     );
+          // Ensure lat and lng are defined, else use default values
+          return {
+            city,
+            state,
+            zip,
+            coordinates: {
+              latitude: lat !== undefined ? lat : null,
+              longitude: lng !== undefined ? lng : null,
+            },
+            range: 50, // Default range value
+          };
+        } catch (error) {
+          // Handle geocoding errors and use default values
+          return {
+            city,
+            state,
+            zip,
+            coordinates: {
+              latitude: null,
+              longitude: null,
+            },
+            range: 50, // Default range value
+          };
+        }
+      })
+    );
 
-//     // Create a new PropertyAlert document
-//     const alert = new saveSearchModel({
-//       userId,
-//       priceRange,
-//       sqftRange,
-//       beds,
-//       baths,
-//       yearAge,
-//       locations: processedLocations,
-//     });
+    // Create a new PropertyAlert document
+    const alert = new saveSearchModel({
+      userId,
+      priceRange,
+      sqftRange,
+      beds,
+      baths,
+      yearAge,
+      locations: processedLocations,
+    });
 
-//     // Save the alert to the database
-//     await alert.save();
+    // Save the alert to the database
+    await alert.save();
 
-//     res.status(201).json({
-//       success: true,
-//       message: "Alert created successfully",
-//       alert,
-//     });
-//   } catch (error: any) {
-//     res.status(500).json({
-//       success: false,
-//       error: "Error creating alert",
-//       details: error.message,
-//     });
-//   }
-// };
+    res.status(201).json({
+      success: true,
+      message: "Alert created successfully",
+      alert,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      error: "Error creating alert",
+      details: error.message,
+    });
+  }
+};
 
 const editSaveSearch = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -239,5 +239,4 @@ const deleteSeacrchStatus = async (req: Request, res: Response): Promise<void> =
   }
 };
 
-export { 
-   editSaveSearch, checkAndSendAlertById, deleteSeacrchStatus };
+export { createSaveSearch, editSaveSearch, checkAndSendAlertById, deleteSeacrchStatus };
